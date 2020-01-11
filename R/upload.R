@@ -1,13 +1,30 @@
-prepare_df <- function(v) {
-  c <- paste0(colnames(v), collapse = ',')
-  r <- apply(v, 1, function(x){paste0(x, collapse = ',')})
-
-  rows <- paste0(r, collapse = '\n')
-
-  return(paste0(c, '\n', rows))
-}
-
+#' Uploads a dataframe R to FNA
+#'
+#' @param login_data generated with the login function.
+#' @param workspace workspace to which the dataframe should be uploaded
+#' @param df dataframe
+#'
+#' @return Returns whether the upload was successful
+#' @export
+#'
+#' @examples
 upload <- function(login_data, workspace, df) {
+
+  # Check whether the login_token is of class FNA_login
+  if (!inherits(login_token, 'FNA_login')) {
+    stop("The argument login_token is not of class FNA_login")
+  }
+
+  prepare_df <- function(v) {
+    c <- paste0(colnames(v), collapse = ',')
+    r <- apply(v, 1, function(x){paste0(x, collapse = ',')})
+
+    rows <- paste0(r, collapse = '\n')
+
+    return(paste0(c, '\n', rows))
+  }
+
+
   file_name <- paste0(as.character(substitute(df)), '.csv')
   url <- paste0(login_data$url, 'rest/resources/', login_data$username, '/', workspace, '/files')
   boundary <- '----WebKitFormBoundaryS9BriLMoa2PUlEGK'
@@ -25,8 +42,8 @@ upload <- function(login_data, workspace, df) {
             'true\r\n' ,
             '--' , boundary , '--')
 
-  r <- POST(url, body = body,
-            add_headers(Authorization = paste("Bearer", login_data$token, sep = " "),
+  r <- httr::POST(url, body = body,
+            httr::add_headers(Authorization = paste("Bearer", login_data$token, sep = " "),
                        'Content-type' = 'multipart/form-data; boundary= ----WebKitFormBoundaryS9BriLMoa2PUlEGK'),
             encode ='multipart', verbose())
   return(r)
