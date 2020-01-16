@@ -5,7 +5,7 @@ Version: 0.1.0
 Author: Lubos Pernis
 Maintainer: Lubos Pernis <lubos@fna.fi>
 Description: Allows to execute FNA code from R
-License: What license is it under?
+License: FNA_license
 Encoding: UTF-8
 LazyData: true
 Imports:
