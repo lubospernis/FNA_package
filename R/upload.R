@@ -14,7 +14,7 @@ upload <- function(df) {
   workspace <- options('FNA_workspace')$FNA_workspace
 
   # Check whether the login_token is of class FNA_login
-  if (!inherits(login_token, 'FNA_login')) {
+  if (!inherits(login_data, 'FNA_login')) {
     stop("The argument login_token is not of class FNA_login")
   }
 
