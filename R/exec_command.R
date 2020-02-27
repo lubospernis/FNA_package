@@ -17,7 +17,7 @@ exec_command <- function(script) {
   }
 
   url <- paste0(login_token$url, 'rest/resources/', login_token$username, '/', workspace, '/context/run')
-  body <- list(command = script, label = 's1')
+  body <- list(command = as.character(script), label = 's1')
   r <- httr::POST(url, body = body, httr::add_headers(Authorization = paste("Bearer", login_token$token, sep = " ")), encode ='json')
   print(r)
   }

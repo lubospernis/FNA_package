@@ -8,6 +8,7 @@
 #' @example
 check <- function(match_call_list) {
   toconsider <- character()
+
   for (element in names(match_call_list)[-1]) {
     if (element != 'None') {
       toconsider <- c(toconsider, element)
@@ -18,8 +19,7 @@ check <- function(match_call_list) {
   final_string <- fna_command
 
   for (i in toconsider) {
-    final_string <- paste0(final_string, ' -', i, ' ', match_call_list[[i]])
+      final_string <- paste0(final_string, ' -', i, ' ', match_call_list[[i]])
   }
-
   return(final_string)
 }

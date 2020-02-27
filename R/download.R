@@ -8,13 +8,16 @@
 #' @export
 #'
 #' @examples
-download <- function(login_token, workspace, file) {
+download <- function(file) {
+
+  login_data <- options('FNA')$FNA
+  workspace <- options('FNA_workspace')$FNA_workspace
   # Check whether the login_token is of class FNA_login
-  if (!inherits(login_token, 'FNA_login')) {
+  if (!inherits(login_data, 'FNA_login')) {
     stop("The argument login_token is not of class FNA_login")
   }
 
-  url <- paste0(login_token$url, 'rest_data/', login_token$username, '/', workspace, '/files/', file)
-  g <- httr::GET(url, httr::add_headers(Authorization = paste("Bearer", login_token$token, sep = " ")))
+  url <- paste0(login_data$url, 'rest_data/', login_data$username, '/', workspace, '/files/', file)
+  g <- httr::GET(url, httr::add_headers(Authorization = paste("Bearer", login_data$token, sep = " ")))
   return(httr::content(g))
 }
