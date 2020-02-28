@@ -2,6 +2,7 @@ Package: FNA
 Type: Package
 Title: FNA API connector
 Version: 0.1.0
+Depends: R (>= 3.1.0)
 Author: Lubos Pernis
 Maintainer: Lubos Pernis <lubos@fna.fi>
 Description: Allows to execute FNA code from R.
