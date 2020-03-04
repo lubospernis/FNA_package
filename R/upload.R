@@ -48,6 +48,6 @@ upload <- function(df) {
   r <- httr::POST(url, body = body,
             httr::add_headers(Authorization = paste("Bearer", login_data$token, sep = " "),
                        'Content-type' = 'multipart/form-data; boundary= ----WebKitFormBoundaryS9BriLMoa2PUlEGK'),
-            encode ='multipart', httr::verbose())
+            encode ='multipart')
   return(r$status)
 }
