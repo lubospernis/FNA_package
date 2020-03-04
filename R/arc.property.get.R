@@ -30,6 +30,7 @@ arc.property.get <- function(property = 'all') {
   unlisted_out <- unlist(out, recursive = FALSE)
 
   names(unlisted_out) <- seq(1:length(unlisted_out))
+
   unlisted_out <- dplyr::bind_rows(unlisted_out)
 
   if (property != 'all') {
